@@ -35,19 +35,19 @@ function Sieb() {
 function render(){
     var body= document.getElementsByTagName( "body")[0]
     var sieb= document.getElementById( "sieb")
-    if (sieb){
-        body.removeChild(sieb)
+    if (sieb){                                   // wenn es ein Tag mit dem Namen "sieb" hat
+        body.removeChild(sieb)                   // im Body soll das Kind "sieb" gelöscht werden
     }
-    sieb= document.createElement( "div")
+    sieb= document.createElement( "div")        
     sieb.id= "sieb"
 
     var table= document.createElement( "table")
     var tableHTML= ""
     
     for( var row= 0; row< siebHoehe; row++) {
-         var rowHTML1 = ZahlenImSieb.slice( row* siebBreite, (row+1)* siebBreite).join( "</td><td>")
-         var rowHTML2 = "<tr><td>" + rowHTML1 + "</td></tr>"
-         tableHTML= tableHTML + rowHTML2
+         var rowHTML1 = ZahlenImSieb.slice( row* siebBreite, (row+1)* siebBreite).join("</td><td>")  // die Zahlen im definierten Bereich werden in Zellen geschrieben
+         var rowHTML2 = "<tr><td>" + rowHTML1 + "</td></tr>" // schreibt die Zahlen in den Zellen von rowHTML1 in einer Zeile <tr>
+         tableHTML= tableHTML + rowHTML2 
     }
     table.innerHTML= tableHTML
     sieb.appendChild( table);
@@ -56,6 +56,8 @@ function render(){
 
 Sieb();
 render();
+
+
 
 
 
