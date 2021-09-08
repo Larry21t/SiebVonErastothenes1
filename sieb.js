@@ -1,36 +1,92 @@
-const siebHoehe= 20;
-const siebBreite= 21;
-const GroessteZahl= siebHoehe*siebBreite;
+const siebHoehe= 10;
+const siebBreite= 10;
+const GroessteZahl= siebHoehe*siebBreite - 1;
 var ZahlenImSieb= []
 function ZahlenAuflisten() {
     var zahl= 0
-    while(zahl< GroessteZahl) {
+    while(zahl<= GroessteZahl) {
         ZahlenImSieb.push( zahl);
         zahl= zahl+1
     }
 }
 
 function Sieben() {
-    var a=2 // Zahl, die gesiebt wird
-    var b=2 // Anzahl Zahlen, die gesprungen werden
+    var Siebzahl=2 // Zahl, die gesiebt wird
+    var Summand=2 // Anzahl Zahlen, die gesprungen werden
 
-    while(b<= GroessteZahl/2){
-        a=b       
-        a= a+a
-        while(a< GroessteZahl) {
-            ZahlenImSieb[a]= "X";
-            a= a+b;
+    while(Summand<= GroessteZahl/2){
+        Siebzahl=Summand;    
+        Siebzahl= Siebzahl+Siebzahl;
+        while(Siebzahl<= GroessteZahl) {
+            ZahlenImSieb[Siebzahl]= "X";
+            Siebzahl= Siebzahl+Summand;
         }
-        b = b+1;   
+        Summand = Summand+1;   
     }  
 }
 
-function Sieb() {
-    ZahlenAuflisten()
-    Sieben()
-    ZahlenImSieb[0]= "X"
-    ZahlenImSieb[1]= "X"
+
+
+
+var aktuellerSummand = 2;
+var aktuelleSiebzahl = 2;
+function siebSchritt1(){   
+    var ret = false
+    if (ZahlenImSieb[0] != "X"){
+        ZahlenImSieb[0] = "X";
+        ret = true
+    }
+    else{
+        if (ZahlenImSieb[1] != "X"){
+            ZahlenImSieb[1] = "X"
+            ret = true
+        }
+        else{
+            
+            if (aktuelleSiebzahl == 2) {
+                        aktuelleSiebzahl = aktuelleSiebzahl + aktuellerSummand
+                        ZahlenImSieb[aktuelleSiebzahl]= "X"
+                        aktuelleSiebzahl = aktuelleSiebzahl + aktuellerSummand
+                        ret = true
+                    }
+            else{
+                
+                    while(ZahlenImSieb [aktuelleSiebzahl]== "X"){
+                        aktuelleSiebzahl = aktuelleSiebzahl + aktuellerSummand
+                    }
+                    if (aktuelleSiebzahl<= GroessteZahl){
+                        ZahlenImSieb [aktuelleSiebzahl] = "X";
+                        aktuelleSiebzahl = aktuelleSiebzahl + aktuellerSummand; 
+                        ret = true                  
+                    }
+                    else{
+                        aktuellerSummand = aktuellerSummand+1
+                        aktuelleSiebzahl = aktuellerSummand + aktuellerSummand
+                        }
+                        
+                    
+                
+                }
+                
+            }
+        }
+
+  return ret  
+
+}  
+
+function siebSchritt2() {
+    while (aktuellerSummand <= GroessteZahl){
+        if(siebSchritt1()){
+            break;
+        }
+    }
+    
+
 }
+
+
+
 
 function render(){
     var body= document.getElementsByTagName( "body")[0]
@@ -54,16 +110,27 @@ function render(){
     body.appendChild( sieb);
 }
 
-Sieb();
-render();
 
 
 
 
 
+    var body = document.getElementsByTagName("body")[0]
+    var buttonB = document.getElementById ("buttonB")
+    if (buttonB){
+        body.removeChild (buttonB)
+    }
+    buttonB= document.createElement ("div")
+    buttonB.id = "buttonB"
+    buttonB.innerHTML= "<button>Next step</button>"
+    buttonB.onclick= function() {
+        siebSchritt2()
+        render()
+    }
+    body.appendChild( buttonB)
 
 
-
-
+ZahlenAuflisten()
+render()
 
 
