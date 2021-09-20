@@ -1,6 +1,9 @@
 const siebHoehe= 10;
 const siebBreite= 10;
 const GroessteZahl= siebHoehe*siebBreite - 1;
+const SliderMax = 2000
+const SliderMin = 0
+const SliderAktuell = 1000
 var ZahlenImSieb= []
 
 
@@ -148,13 +151,14 @@ function render(){
 function nextStep() {
     siebSchritt2()
     render()
-    setTimeout( nextStep, 500) //Als zweites Objekt werden hier die Millisekunden eingesetzt, diese sollen dem aktuellen Wert des Sliders entsprechen.
+    var timeout= 2000- parseInt( myRange.value)
+    setTimeout( nextStep, timeout ) //Als zweites Objekt werden hier die Millisekunden eingesetzt, diese sollen dem aktuellen Wert des Sliders entsprechen.
 }
 
 
 
 function wertAnzeigen(val){
-    absatz.innerHTML = "Zeit in Millisekunden: " + val; 
+    absatz.innerHTML = "Zeit in Millisekunden: " + (2000-val); 
 }
 
 
@@ -165,21 +169,21 @@ var body = document.getElementsByTagName ("body") [0]
 var myInput = document.getElementById ("myInput")
 myInput = document.createElement ("div")
 myInput.id = "myInput"
-myInput.innerHTML = "<input id=\"my-range\" type=\"range\" min=\"0\" max=\"2000\" value=\"0\" class=\"slider\">" 
+myInput.innerHTML = `<input id=\"my-range\" type=\"range\" min=\"${SliderMin}\" max=\"${SliderMax}\" value=\"${SliderAktuell}\" class=\"slider\">`
 var absatz = document.getElementById ("absatz")
 absatz = document.createElement ("p")
 absatz.id = "absatz"
-absatz.innerHTML = "Zeit in Millisekunden: "  
+absatz.innerHTML = "Zeit in Millisekunden: " 
 
 
 body.appendChild (absatz)
 body.appendChild (myInput)
 
-var myRange= document.getElementById("my-range")
+var myRange= document.getElementById ("my-range")
 myRange.oninput = function() {
-    wertAnzeigen(this.value)    
+    wertAnzeigen(this.value) 
+    // nextStep(this.value)
 }
-
 
 
 
