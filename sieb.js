@@ -13,7 +13,6 @@ const slideraktuell = 1000
 */
 var ZahlenImSieb= []
 
-
 function ZahlenAuflisten() {
     var zahl= 0
     while(zahl<= groessteZahl) {
@@ -49,6 +48,7 @@ function ZelleSchwarzAusfuellenFallsEineZahlDrinSteht( zellenIndex) {
     }
     return ret    
 }
+
 // gibt true zurück, falls die Zelle geleert wurde
 function ZelleLeerenFallsSchwarzAusgefuellt ( zellenIndex){
     var ret = false
@@ -88,6 +88,7 @@ function SummandenErhoehenFallsDieSiebzahlGroesserAlsDieGroessteZahlIst (){
 
     }
 }
+
 /* Definiert den Wert der Variablen aktuelleSiebzahl neu, falls die aktuelleSiebzahl grösser als die groessteZahl ist. 
    Der Wert der Variablen aktuelleSiebzahl entspricht nun zweimal dem Wert der Variable aktuellerSummand.
 */
